@@ -10,7 +10,7 @@ all: checkout configure compile
 .PHONY : copy
 copy:
 	find ffmpeg -name '*.so*' -exec cp {} . \;
-	$(HOST)-strip *.so*
+	strip *.so*
 
 .PHONY : compile
 compile: 
@@ -23,7 +23,6 @@ configure:
 	LDFLAGS="" \
   ./configure \
 			--extra-cflags="-mfpu=vfp -mfloat-abi=$(FLOAT) -mno-apcs-stack-check -mstructure-size-boundary=32 -mno-sched-prolog" \
-			--enable-cross-compile \
 			--enable-shared \
 			--disable-static \
 			--arch=arm \
@@ -54,7 +53,7 @@ configure:
 			--enable-armv6 \
 			--enable-hardcoded-tables \
 			--disable-runtime-cpudetect \
-			--disable-debug \
+			--disable-debug 
 			--disable-crystalhd \
 			--disable-decoder=h264_vda \
 			--disable-decoder=h264_crystalhd \
@@ -244,7 +243,7 @@ configure:
 			--disable-decoder=xbin \
 			--disable-decoder=idf \
 			--enable-decoder=opus \
-			--cross-prefix=$(HOST)-
+
 
 .PHONY : clean
 clean:
@@ -256,6 +255,6 @@ checkout:
 
 .PHONY : install
 install:
-	cd ffmpeg; make -j9 DESTDIR="$(WORK)/ffmpeg_compiled" install
-	$(HOST)-strip ffmpeg_compiled/usr/local/lib/*.so
+	cd ffmpeg; make DESTDIR="$(WORK)/ffmpeg_compiled" install
+	strip ffmpeg_compiled/usr/local/lib/*.so
 

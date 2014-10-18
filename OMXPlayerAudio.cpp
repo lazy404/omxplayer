@@ -212,10 +212,10 @@ bool OMXPlayerAudio::Decode(OMXPacket *pkt)
   if(pkt->hints.codec          != m_hints.codec ||
      pkt->hints.samplerate     != m_hints.samplerate ||
      (!m_passthrough && minor_change))
-  {
+  {/*
     printf("C : %d %d %d %d %d\n", m_hints.codec, m_hints.channels, m_hints.samplerate, m_hints.bitrate, m_hints.bitspersample);
     printf("N : %d %d %d %d %d\n", pkt->hints.codec, channels, pkt->hints.samplerate, pkt->hints.bitrate, pkt->hints.bitspersample);
-
+*/
 
     CloseDecoder();
     CloseAudioCodec();
@@ -455,7 +455,7 @@ bool OMXPlayerAudio::OpenDecoder()
     m_decoder = NULL;
     return false;
   }
-  else
+/*  else
   {
     if(m_passthrough)
     {
@@ -468,6 +468,7 @@ bool OMXPlayerAudio::OpenDecoder()
         m_codec_name.c_str(), m_hints.channels, m_hints.samplerate, m_hints.bitspersample);
     }
   }
+*/
   // setup current volume settings
   m_decoder->SetVolume(m_CurrentVolume);
   m_decoder->SetMute(m_mute);

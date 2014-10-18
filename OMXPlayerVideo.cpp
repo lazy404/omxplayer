@@ -308,7 +308,7 @@ bool OMXPlayerVideo::OpenDecoder()
 
   if( m_fps > 100 || m_fps < 5 )
   {
-    printf("Invalid framerate %d, using forced 25fps and just trust timestamps\n", (int)m_fps);
+    //printf("Invalid framerate %d, using forced 25fps and just trust timestamps\n", (int)m_fps);
     m_fps = 25;
   }
 
@@ -319,11 +319,6 @@ bool OMXPlayerVideo::OpenDecoder()
   {
     CloseDecoder();
     return false;
-  }
-  else
-  {
-    printf("Video codec %s width %d height %d profile %d fps %f\n",
-        m_decoder->GetDecoderName().c_str() , m_hints.width, m_hints.height, m_hints.profile, m_fps);
   }
 
   // start from assuming all recent frames had valid pts

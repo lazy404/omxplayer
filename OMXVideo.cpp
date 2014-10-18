@@ -175,14 +175,14 @@ bool COMXVideo::PortSettingsChanged()
 
   if (m_settings_changed)
   {
-    CLog::Log(LOGDEBUG, "%s::%s - %dx%d@%.2f interlace:%d deinterlace:%d anaglyph:%d par:%.2f display:%d layer:%d", CLASSNAME, __func__,
+/*    CLog::Log(LOGDEBUG, "%s::%s - %dx%d@%.2f interlace:%d deinterlace:%d anaglyph:%d par:%.2f display:%d layer:%d", CLASSNAME, __func__,
         port_image.format.video.nFrameWidth, port_image.format.video.nFrameHeight,
         port_image.format.video.xFramerate / (float)(1<<16), 0, m_deinterlace, m_anaglyph, m_pixel_aspect, m_display, m_layer);
 
     printf("V:PortSettingsChanged: %dx%d@%.2f interlace:%d deinterlace:%d anaglyph:%d par:%.2f display:%d layer:%d\n",
         port_image.format.video.nFrameWidth, port_image.format.video.nFrameHeight,
         port_image.format.video.xFramerate / (float)(1<<16), 0, m_deinterlace, m_anaglyph, m_pixel_aspect, m_display, m_layer);
-
+*/
     SetVideoRect(m_src_rect, m_dst_rect);
     m_omx_decoder.EnablePort(m_omx_decoder.GetOutputPort(), true);
     return true;
@@ -209,10 +209,10 @@ bool COMXVideo::PortSettingsChanged()
       port_image.format.video.nFrameWidth, port_image.format.video.nFrameHeight,
       port_image.format.video.xFramerate / (float)(1<<16), interlace.eMode, m_deinterlace, m_anaglyph, m_pixel_aspect, m_layer);
 
-  printf("V:PortSettingsChanged: %dx%d@%.2f interlace:%d deinterlace:%d anaglyph:%d par:%.2f layer:%d\n",
+/*  printf("V:PortSettingsChanged: %dx%d@%.2f interlace:%d deinterlace:%d anaglyph:%d par:%.2f layer:%d\n",
       port_image.format.video.nFrameWidth, port_image.format.video.nFrameHeight,
       port_image.format.video.xFramerate / (float)(1<<16), interlace.eMode, m_deinterlace, m_anaglyph, m_pixel_aspect, m_layer);
-
+*/
   if(!m_omx_sched.Initialize("OMX.broadcom.video_scheduler", OMX_IndexParamVideoInit))
     return false;
 
@@ -887,7 +887,8 @@ void COMXVideo::SetVideoRect(const CRect& SrcRect, const CRect& DestRect)
   if (DestRect.x2 > DestRect.x1 && DestRect.y2 > DestRect.y1)
   {
     configDisplay.fullscreen = OMX_FALSE;
-    configDisplay.noaspect   = OMX_TRUE;
+    configDisplay.noaspect   = OMX_FALSE;
+    //ww dla cc
 
     configDisplay.set                 = (OMX_DISPLAYSETTYPE)(OMX_DISPLAY_SET_DEST_RECT|OMX_DISPLAY_SET_SRC_RECT|OMX_DISPLAY_SET_FULLSCREEN|OMX_DISPLAY_SET_NOASPECT);
     configDisplay.dest_rect.x_offset  = (int)(DestRect.x1+0.5f);
