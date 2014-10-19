@@ -52,7 +52,7 @@ version:
 
 omxplayer.bin: version $(OBJS)
 	$(CXX) $(LDFLAGS) -o omxplayer.bin $(OBJS) -lvchiq_arm -lvcos -ldbus-1 -lrt -lpthread -lavutil -lavcodec -lavformat -lswscale -lswresample -lpcre
-	$(STRIP) omxplayer.bin
+	#$(STRIP) omxplayer.bin
 
 help.h: README.md Makefile
 	awk '/SYNOPSIS/{p=1;print;next} p&&/KEY BINDINGS/{p=0};p' $< \
