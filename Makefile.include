@@ -1,6 +1,6 @@
 FLOAT=hard
 
-CFLAGS += -O0 -g -mfloat-abi=hard -mcpu=arm1176jzf-s -fomit-frame-pointer -mabi=aapcs-linux -mtune=arm1176jzf-s -mfpu=vfp -Wno-psabi -mno-apcs-stack-check -mstructure-size-boundary=32 -mno-sched-prolog -march=armv6zk 
+CFLAGS += -O3 -mfloat-abi=hard -mcpu=arm1176jzf-s -fomit-frame-pointer -mabi=aapcs-linux -mtune=arm1176jzf-s -mfpu=vfp -Wno-psabi -mno-apcs-stack-check -mstructure-size-boundary=32 -mno-sched-prolog -march=armv6zk 
 
 BUILDROOT	:=/usr/local/src/omxplayer
 TOOLCHAIN	:=/usr/
