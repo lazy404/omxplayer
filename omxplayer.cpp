@@ -513,7 +513,7 @@ int main(int argc, char *argv[])
   CRBP                  g_RBP;
   COMXCore              g_OMX;
   bool                  m_stats               = false;
-  bool                   m_qstats             = false;
+  bool                   mq_stats             = false;
   bool                  m_dump_format         = false;
   bool                  m_dump_format_exit    = false;
   FORMAT_3D_T           m_3d                  = CONF_FLAGS_FORMAT_NONE;
@@ -1149,25 +1149,13 @@ int main(int argc, char *argv[])
         }
           if(m_has_subtitle)
             m_player_subtitles.Pause();
-
-          auto t = (unsigned) (m_av_clock->OMXMediaTime()*1e-6);
-          auto dur = m_omx_reader.GetStreamLength() / 1000;
-          /*
-	    DISPLAY_TEXT_LONG(strprintf("Pause\n%02d:%02d:%02d / %02d:%02d:%02d",
-            (t/3600), (t/60)%60, t%60, (dur/3600), (dur/60)%60, dur%60));*/
+	break;
       case KeyConfig::ACTION_PLAY:
         m_Pause = false;
           if(m_has_subtitle)
             m_player_subtitles.Resume();
-	/*
-          auto t = (unsigned) (m_av_clock->OMXMediaTime()*1e-6);
-          auto dur = m_omx_reader.GetStreamLength() / 1000;
-          DISPLAY_TEXT_SHORT(strprintf("Play\n%02d:%02d:%02d / %02d:%02d:%02d",
-            (t/3600), (t/60)%60, t%60, (dur/3600), (dur/60)%60, dur%60));
-	*/
         break;
-      case KeyConfig::INFO_POS:
-            
+      case KeyConfig::INFO_POS:            
             printf("==>%02d/%02d\r\n", (int) (m_av_clock->OMXMediaTime()*1e-3),(int)m_omx_reader.GetStreamLength());
             fflush(stdout);
             break;
